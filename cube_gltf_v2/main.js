@@ -12,17 +12,18 @@ camera.position.set(0, 0, 300);
 const light = new THREE.AmbientLight(0xffffff, 1);
 scene.add(light);
 
-const loader = new GLTFLoader().setPath('public/box-Mesh/');
-loader.load('box-Mesh 759986.gltf', (gltf) => {
+const loader = new GLTFLoader().setPath('public/box-Mesh-center/');
+loader.load('untitled.gltf', (gltf) => {
   const mesh = gltf.scene;
-  const group = new THREE.Group();
-  group.add(mesh);
+  scene.add(mesh);
 
-  const box = new THREE.Box3().setFromObject(mesh);
-  const center = box.getCenter(new THREE.Vector3());
-  group.position.set(-center.x, -center.y, -center.z);  // Offset the group
+  function animate() {
+    requestAnimationFrame(animate);
+    mesh.rotation.y += 0.01;
+    renderer.render(scene, camera);
+  }
 
-  scene.add(group);
+  animate();
 });
 
 function animate() {
