@@ -15,7 +15,14 @@ scene.add(light);
 const loader = new GLTFLoader().setPath('public/box-Mesh/');
 loader.load('box-Mesh 759986.gltf', (gltf) => {
   const mesh = gltf.scene;
-  scene.add(mesh);
+  const group = new THREE.Group();
+  group.add(mesh);
+
+  const box = new THREE.Box3().setFromObject(mesh);
+  const center = box.getCenter(new THREE.Vector3());
+  group.position.set(-center.x, -center.y, -center.z);  // Offset the group
+
+  scene.add(group);
 });
 
 function animate() {
