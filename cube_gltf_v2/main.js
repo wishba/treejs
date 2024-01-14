@@ -1,10 +1,12 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
 const scene = new THREE.Scene();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setClearColor(0x000000, 0);
+renderer.setSize(500, 600);
+const tree = document.getElementById('tree')
+tree.appendChild(renderer.domElement);
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 0, 300);
